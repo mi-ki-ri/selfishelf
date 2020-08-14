@@ -14,8 +14,8 @@ export default ({ data }) => {
 }
 
 export const query = graphql`
-query MyQuery {
-  allWordpressPost(filter: {id: {eq: "615035f4-df60-534a-861a-3d47e53d5d3f"}}) {
+query MyQuery($id: String!) {
+  allWordpressPost(filter: {id: {eq: $id}}) {
     edges {
       node {
         date
