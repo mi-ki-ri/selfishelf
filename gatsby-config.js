@@ -1,8 +1,8 @@
 module.exports = {
   siteMetadata: {
-    title: `Gatsby Default Starter`,
-    description: `Kick off your next, great Gatsby project with this default starter. This barebones starter ships with the main Gatsby configuration files you might need.`,
-    author: `@gatsbyjs`,
+    title: `Selfishelf`,
+    description: `見切り発車Pの個人サイトです。 / Personal Site Of Mikirihassha P(Vocaloid Producer)`,
+    author: `@mi_ki_ri`,
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
@@ -45,6 +45,7 @@ module.exports = {
           '**/categories'
         ]
       },
-    }
+    },
+    
   ],
 }

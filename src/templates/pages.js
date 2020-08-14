@@ -3,7 +3,22 @@ import { Link, graphql } from "gatsby"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 
-export default ({ data }) => {
+export default ({ data, pageContext }) => {
+
+
+  const BlogIndex = (props) => {
+    return (
+      <div>
+        <div>
+          <Link to={props.pageContext.previousPagePath}>Previous</Link> / 
+          <Link to={props.pageContext.nextPagePath}>Next</Link>
+        </div>
+      </div>
+    )
+  }
+
+
+
   return (
     <Layout>
       <SEO title="home" />
@@ -17,14 +32,19 @@ export default ({ data }) => {
           <div dangerouslySetInnerHTML={{ __html: node.excerpt }} />
         </div>
       ))}
-      <Link to={"pages/2"} dangerouslySetInnerHTML={{__html: "next"}}></Link>
+      <BlogIndex pageContext={pageContext}></BlogIndex>
     </Layout>
   )
 }
 
 export const pageQuery = graphql`
-  query {
-    allWordpressPost(sort: { fields: [date] }) {
+  query ($skip: Int!, $limit: Int!) {
+    allWordpressPost(
+        sort: { fields: [date] }
+        skip: $skip
+        limit: $limit
+        
+    ) {
       edges {
         node {
           title
