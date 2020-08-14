@@ -2,6 +2,7 @@ import React from "react"
 import { Link, graphql } from "gatsby"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
+import {List, ListItem, ListItemText} from "@material-ui/core"
 
 export default ({ data, pageContext }) => {
 
@@ -9,10 +10,8 @@ export default ({ data, pageContext }) => {
   const BlogIndex = (props) => {
     return (
       <div>
-        <div>
-          <Link to={props.pageContext.previousPagePath}>Previous</Link> / 
-          <Link to={props.pageContext.nextPagePath}>Next</Link>
-        </div>
+        <Link to={props.pageContext.previousPagePath}>Previous</Link> /
+        <Link to={props.pageContext.nextPagePath}>Next</Link>
       </div>
     )
   }
@@ -21,18 +20,24 @@ export default ({ data, pageContext }) => {
 
   return (
     <Layout>
-      <SEO title="home" />
-      <h1>My WordPress Blog</h1>
-      <h4>Posts</h4>
-      {data.allWordpressPost.edges.map(({ node }) => (
-        <div>
+      <h2>Posts</h2>
+      <List>
+        {data.allWordpressPost.edges.map(({ node }) => (
           <Link to={"posts/" + node.id}>
-            <p>{node.title}</p>
+            <ListItem alignItems="flex-start">
+              <ListItemText
+                primary={node.title}
+                secondary={
+                  <div dangerouslySetInnerHTML={{ __html: node.excerpt }} />
+                }
+
+              />
+            </ListItem>
           </Link>
-          <div dangerouslySetInnerHTML={{ __html: node.excerpt }} />
-        </div>
-      ))}
-      <BlogIndex pageContext={pageContext}></BlogIndex>
+        ))}
+      </List>
+      <BlogIndex pageContext={pageContext} />
+
     </Layout>
   )
 }

@@ -2,22 +2,30 @@ import React from "react"
 import { Link, graphql } from "gatsby"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
+import { List, ListItem, ListItemText, Typography, ListItemSecondaryAction } from "@material-ui/core"
 
 export default ({ data }) => {
   return (
     <Layout>
       <SEO title="home" />
-      <h1>My WordPress Blog</h1>
-      <h4>Posts</h4>
-      {data.allWordpressPost.edges.map(({ node }) => (
-        <div>
+      <h2>Posts</h2>
+      <List>
+        {data.allWordpressPost.edges.map(({ node }) => (
           <Link to={"posts/" + node.id}>
-            <p>{node.title}</p>
+            <ListItem alignItems="flex-start">
+              <ListItemText
+                primary={node.title}
+                secondary={
+                  <div dangerouslySetInnerHTML={{ __html: node.excerpt }} />
+                }
+
+              />
+            </ListItem>
           </Link>
-          <div dangerouslySetInnerHTML={{ __html: node.excerpt }} />
-        </div>
-      ))}
-      <Link to={"pages/2"} dangerouslySetInnerHTML={{__html: "next"}}></Link>
+        ))}
+      </List>
+      <Link to={"pages/2"} dangerouslySetInnerHTML={{ __html: "next" }}></Link>
+
     </Layout>
   )
 }
