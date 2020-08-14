@@ -14,7 +14,7 @@ export default ({ data }) => {
           <Link to={"posts/" + node.id}>
             <ListItem alignItems="flex-start">
               <ListItemText
-                primary={node.title}
+                primary={ node.date + ": " + node.title}
                 secondary={
                   <div dangerouslySetInnerHTML={{ __html: node.excerpt }} />
                 }
@@ -39,6 +39,7 @@ export const pageQuery = graphql`
           excerpt
           slug
           id
+          date
         }
       }
     }

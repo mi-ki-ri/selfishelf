@@ -9,6 +9,7 @@ export default ({ data }) => {
       <h2>{story.title}</h2>
       <div>
         <div dangerouslySetInnerHTML={{ __html: story.content }} />
+        <p>{story.date}</p>
       </div>
     </Layout>
   )
