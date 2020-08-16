@@ -45,7 +45,7 @@ export default ({ data, pageContext }) => {
 export const pageQuery = graphql`
   query ($skip: Int!, $limit: Int!) {
     allWordpressPost(
-        sort: { fields: [date:DESC] }
+        sort: { fields: [date], order: DESC }
         skip: $skip
         limit: $limit
         
