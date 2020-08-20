@@ -1,7 +1,7 @@
 import React from "react"
 import { graphql } from "gatsby"
 import Layout from "../components/layout"
-
+import styled from "styled-components"
 
 export default ({ data }) => {
   // Create reference instance
@@ -9,27 +9,27 @@ export default ({ data }) => {
   
   const story = data.allWordpressPost.edges[0].node
   
-  const mkContent = marked( story.content );
+  const story2 = story.content.substring(3)
+  const story3 = story2.substring(-4) 
   
-  const mdClass = css`
-    & strong::before{content:"**";}
-    & strong::after{content:"**";}
-    & em::before{content: "*";}
-    & em::after{content: "*";}
-    
-    & code::before{content:"\`";}
-    & code::after{content:"\`;}
-    
-  `
+  const splitted = story3.split("<br />")
+  
+  var txt = ""
+  splitted.forEach(element => {
+    txt += element
+  });
+  
+  const mkContent = marked( txt );
   
   
+
   return (
     <Layout>
       <h2>{story.title}</h2>
       <div>
         <div
           dangerouslySetInnerHTML={{ __html: mkContent }}
-          className={mdClass}
+          
         />
         <p>{story.date}</p>
       </div>
